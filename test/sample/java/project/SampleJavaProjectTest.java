@@ -1,19 +1,42 @@
 package sample.java.project;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import org.junit.Before;
+import org.junit.Test;
 
-public class SampleJavaProjectTest extends TestCase {
-    public SampleJavaProjectTest(String name) {
-	super(name);
+/**
+ * Sample JUnit tests.
+ */
+public class SampleJavaProjectTest {
+
+    /**
+     * Holds an instance of the class we are testing.
+     */
+    private SampleJavaProject sjp;
+
+    /**
+     * JUnit set up method.
+     */
+    @Before
+    public final void setUp() {
+        sjp = new SampleJavaProject();
     }
 
-    SampleJavaProject sjp;
-
-    public void setUp() {
-	sjp = new SampleJavaProject();
+    /**
+     * Tests the generated setter and getter methods.
+     */
+    @Test
+    public final void testGetSet() {
+        sjp.setName("foo");
+        assertEquals("foo", sjp.getName());
     }
 
-    public void testAdd() {
-	assert(sjp.add(3, 4) == 7);
+    /**
+     * Tests that the null check in the setter.
+     */
+    @Test(expected=NullPointerException.class)
+    public final void nullTest() {
+        sjp.setName(null);
     }
 }
